@@ -24,8 +24,8 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
   const newMonthlyPayment = prepayment.newMonthlyPayment;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">繰り上げ返済効果</h3>
+    <div className="bg-card rounded-lg border border-border shadow-sm p-5">
+      <h3 className="text-sm font-semibold text-foreground mb-4">繰り上げ返済効果</h3>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
@@ -75,9 +75,9 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
       </div>
 
       {/* ハイライト */}
-      <div className="mt-4 rounded-lg bg-gray-50 border border-gray-100 px-4 py-3 flex items-center justify-between">
-        <span className="text-sm text-gray-700 font-medium">繰り上げ返済による節約効果</span>
-        <span className="text-xl font-bold text-gray-900">{formatManYen(saved)}</span>
+      <div className="mt-4 rounded-lg bg-muted/50 border border-border px-4 py-3 flex items-center justify-between">
+        <span className="text-sm text-foreground font-medium">繰り上げ返済による節約効果</span>
+        <span className="text-xl font-bold text-foreground">{formatManYen(saved)}</span>
       </div>
     </div>
   );

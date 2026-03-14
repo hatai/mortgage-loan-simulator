@@ -25,49 +25,49 @@ export function SummaryCard({ result }: SummaryCardProps) {
   const maintenanceFee = totalMonthlyPayment - monthlyLoanPayment;
 
   return (
-    <div className="rounded-lg overflow-hidden shadow-sm border border-gray-100 bg-white">
+    <div className="rounded-lg overflow-hidden shadow-sm border border-border bg-card">
       {/* メインサマリー */}
       <div className="px-6 py-5">
-        <p className="text-sm text-gray-500 mb-1">月々の総支払額</p>
-        <p className="text-3xl font-bold text-gray-900 tracking-tight">
+        <p className="text-sm text-muted-foreground mb-1">月々の総支払額</p>
+        <p className="text-3xl font-bold text-foreground tracking-tight">
           {formatYen(totalMonthlyPayment)}
         </p>
 
         <div className="mt-3 space-y-1">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">ローン返済額</span>
-            <span className="font-semibold text-gray-900">{formatYen(monthlyLoanPayment)}</span>
+            <span className="text-muted-foreground">ローン返済額</span>
+            <span className="font-semibold text-foreground">{formatYen(monthlyLoanPayment)}</span>
           </div>
           {maintenanceFee > 0 && (
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-500">維持費（管理・修繕・固定資産税）</span>
-              <span className="font-semibold text-gray-900">{formatYen(maintenanceFee)}</span>
+              <span className="text-muted-foreground">維持費（管理・修繕・固定資産税）</span>
+              <span className="font-semibold text-foreground">{formatYen(maintenanceFee)}</span>
             </div>
           )}
         </div>
       </div>
 
       {/* 3カード */}
-      <div className="grid grid-cols-3 divide-x divide-gray-100 border-t border-gray-100">
+      <div className="grid grid-cols-3 divide-x divide-border border-t border-border">
         <div className="px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground mb-1">総返済額</p>
-          <p className="text-lg font-bold text-gray-900">{formatManYen(totalRepayment)}</p>
+          <p className="text-lg font-bold text-foreground">{formatManYen(totalRepayment)}</p>
         </div>
         <div className="px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground mb-1">利息総額</p>
-          <p className="text-lg font-bold text-gray-900">{formatManYen(totalInterest)}</p>
+          <p className="text-lg font-bold text-foreground">{formatManYen(totalInterest)}</p>
         </div>
         <div className="px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground mb-1">目安年収（25%）</p>
-          <p className="text-lg font-bold text-gray-900">{formatManYen(requiredIncome[25] ?? 0)}</p>
+          <p className="text-lg font-bold text-foreground">{formatManYen(requiredIncome[25] ?? 0)}</p>
         </div>
       </div>
 
       {/* 控除総額 */}
       {taxDeduction.totalDeduction > 0 && (
-        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-          <span className="text-sm text-gray-600">住宅ローン控除総額（13年合計）</span>
-          <span className="text-sm font-bold text-gray-900">
+        <div className="px-6 py-3 bg-amber-50 dark:bg-amber-900/20 border-t border-amber-100 dark:border-amber-800 flex items-center justify-between">
+          <span className="text-sm text-amber-800 dark:text-amber-200">住宅ローン控除総額（13年合計）</span>
+          <span className="text-sm font-bold text-amber-900 dark:text-amber-100">
             -{formatManYen(taxDeduction.totalDeduction)}
           </span>
         </div>

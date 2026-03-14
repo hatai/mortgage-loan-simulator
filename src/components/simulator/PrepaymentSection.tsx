@@ -43,7 +43,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
   };
 
   return (
-    <div className="rounded-lg bg-white border border-gray-100 shadow-sm">
+    <div className="rounded-lg bg-card border border-border shadow-sm">
       {/* アコーディオンヘッダー */}
       <button
         type="button"
@@ -143,7 +143,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
                       } ${
                         item.type === type
                           ? "bg-slate-900 text-white"
-                          : "bg-white text-gray-500 hover:text-gray-700"
+                          : "bg-card text-muted-foreground hover:text-gray-700"
                       }`}
                     >
                       {PREPAYMENT_TYPE_LABELS[type]}

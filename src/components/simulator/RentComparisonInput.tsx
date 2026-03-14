@@ -19,7 +19,7 @@ export function RentComparisonInput({
   const isEnabled = currentRent !== undefined && currentRent > 0;
 
   return (
-    <div className="rounded-lg bg-white border border-gray-100 shadow-sm">
+    <div className="rounded-lg bg-card border border-border shadow-sm">
       {/* アコーディオンヘッダー */}
       <button
         type="button"

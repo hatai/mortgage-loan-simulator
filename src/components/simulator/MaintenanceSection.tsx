@@ -18,8 +18,8 @@ export function MaintenanceSection({
   const monthlyTotal = maintenanceFee + repairReserve + Math.round((propertyTax * 10000) / 12);
 
   return (
-    <div className="rounded-lg bg-white border border-gray-100 shadow-sm p-5">
-      <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">維持費</h2>
+    <div className="rounded-lg bg-card border border-border shadow-sm p-5">
+      <h2 className="text-xs font-medium text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4">維持費</h2>
 
       <div className="space-y-3">
         {/* 管理費 */}
@@ -95,9 +95,9 @@ export function MaintenanceSection({
         </div>
 
         {/* 合計 */}
-        <div className="rounded-md bg-gray-50 px-4 py-3 flex justify-between items-center">
-          <span className="text-xs text-gray-700 font-medium">維持費合計（月額）</span>
-          <span className="text-base font-bold text-gray-900">
+        <div className="rounded-md bg-amber-50 dark:bg-amber-900/20 px-4 py-3 flex justify-between items-center">
+          <span className="text-xs text-amber-700 dark:text-amber-300 font-medium">維持費合計（月額）</span>
+          <span className="text-base font-bold text-amber-700 dark:text-amber-300">
             {monthlyTotal.toLocaleString("ja-JP")} 円
           </span>
         </div>

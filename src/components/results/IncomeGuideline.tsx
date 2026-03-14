@@ -14,30 +14,30 @@ const TIERS = [
     ratio: 20,
     label: "安心",
     description: "余裕をもった返済",
-    bgClass: "bg-emerald-50",
-    borderClass: "border-emerald-100",
-    badgeClass: "bg-emerald-50 text-emerald-700 border border-emerald-100",
-    valueClass: "text-emerald-700",
+    bgClass: "bg-emerald-50 dark:bg-emerald-900/20",
+    borderClass: "border-emerald-100 dark:border-emerald-800",
+    badgeClass: "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800",
+    valueClass: "text-emerald-700 dark:text-emerald-300",
     barClass: "bg-emerald-500",
   },
   {
     ratio: 25,
     label: "適正",
     description: "標準的な返済比率",
-    bgClass: "bg-amber-50",
-    borderClass: "border-amber-100",
-    badgeClass: "bg-amber-50 text-amber-700 border border-amber-100",
-    valueClass: "text-amber-700",
+    bgClass: "bg-amber-50 dark:bg-amber-900/20",
+    borderClass: "border-amber-100 dark:border-amber-800",
+    badgeClass: "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border border-amber-100 dark:border-amber-800",
+    valueClass: "text-amber-700 dark:text-amber-300",
     barClass: "bg-amber-500",
   },
   {
     ratio: 30,
     label: "注意",
     description: "やや負担が大きい",
-    bgClass: "bg-red-50",
-    borderClass: "border-red-100",
-    badgeClass: "bg-red-50 text-red-700 border border-red-100",
-    valueClass: "text-red-700",
+    bgClass: "bg-red-50 dark:bg-red-900/20",
+    borderClass: "border-red-100 dark:border-red-800",
+    badgeClass: "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-100 dark:border-red-800",
+    valueClass: "text-red-700 dark:text-red-300",
     barClass: "bg-red-500",
   },
 ] as const;
@@ -46,8 +46,8 @@ export function IncomeGuideline({ result }: IncomeGuidelineProps) {
   const { requiredIncome } = result;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5">
-      <h3 className="text-sm font-semibold text-gray-700 mb-1">
+    <div className="bg-card rounded-lg border border-border shadow-sm p-5">
+      <h3 className="text-sm font-semibold text-foreground mb-1">
         <GlossaryTooltip termKey="repayment_ratio">返済比率</GlossaryTooltip>別の目安年収
       </h3>
       <p className="text-xs text-muted-foreground mb-4">

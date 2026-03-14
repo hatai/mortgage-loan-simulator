@@ -20,7 +20,7 @@ export function PropertySection({
     propertyPrice > 0 ? ((downPayment / propertyPrice) * 100).toFixed(1) : "0.0";
 
   return (
-    <div className="rounded-lg bg-white border border-gray-100 shadow-sm p-5">
+    <div className="rounded-lg bg-card border border-border shadow-sm p-5">
       <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">物件情報</h2>
 
       <div className="space-y-3">
@@ -34,7 +34,7 @@ export function PropertySection({
               className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
                 propertyType === "new"
                   ? "bg-slate-900 text-white"
-                  : "bg-white text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  : "bg-card text-muted-foreground hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               新築
@@ -45,7 +45,7 @@ export function PropertySection({
               className={`flex-1 py-1.5 text-sm font-medium transition-colors border-l border-gray-200 ${
                 propertyType === "used"
                   ? "bg-slate-900 text-white"
-                  : "bg-white text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  : "bg-card text-muted-foreground hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               中古
@@ -100,9 +100,9 @@ export function PropertySection({
         </div>
 
         {/* 借入金額（計算表示） */}
-        <div className="rounded-md bg-gray-50 px-4 py-3 flex justify-between items-center">
-          <span className="text-xs text-gray-700 font-medium">借入金額</span>
-          <span className="text-base font-bold text-gray-700">
+        <div className="rounded-md bg-blue-50 dark:bg-blue-900/20 px-4 py-3 flex justify-between items-center">
+          <span className="text-xs text-blue-700 dark:text-blue-300 font-medium">借入金額</span>
+          <span className="text-base font-bold text-blue-700 dark:text-blue-300">
             {loanAmount.toLocaleString("ja-JP")} 万円
           </span>
         </div>
