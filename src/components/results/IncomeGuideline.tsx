@@ -1,4 +1,5 @@
 import type { LoanResult } from "#/lib/types";
+import { GlossaryTooltip } from "#/components/shared/Tooltip";
 
 function formatManYen(amount: number): string {
   return `${Math.round(amount / 10000).toLocaleString("ja-JP")}万円`;
@@ -46,7 +47,9 @@ export function IncomeGuideline({ result }: IncomeGuidelineProps) {
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-      <h3 className="text-sm font-semibold text-gray-700 mb-1">返済比率別の目安年収</h3>
+      <h3 className="text-sm font-semibold text-gray-700 mb-1">
+        <GlossaryTooltip termKey="repayment_ratio">返済比率</GlossaryTooltip>別の目安年収
+      </h3>
       <p className="text-xs text-muted-foreground mb-4">
         月々の総支払額を各返済比率で割り戻した目安年収です。
       </p>
@@ -77,7 +80,7 @@ export function IncomeGuideline({ result }: IncomeGuidelineProps) {
                       {label}
                     </span>
                     <span className="text-xs text-gray-500">
-                      返済比率 {ratio}% — {description}
+                      <GlossaryTooltip termKey="repayment_ratio">返済比率</GlossaryTooltip> {ratio}% — {description}
                     </span>
                   </div>
                   <span className={`text-lg font-bold ${valueClass}`}>{formatManYen(income)}</span>

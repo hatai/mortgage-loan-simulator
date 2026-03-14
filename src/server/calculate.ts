@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { loanInputSchema } from "./validation";
 import {
   calculateEqualPayment,
+  calculateEqualPrincipal,
   calculateWithBonus,
   generateSchedule,
   calculateVariableRateScenarios,
@@ -28,6 +29,9 @@ export const calculateLoan = createServerFn({ method: "POST" })
         data.bonusPayment * 10_000,
       );
       monthlyLoanPayment = bonus.monthlyPayment;
+    } else if (data.repaymentMethod === "equal_principal") {
+      // For equal principal, use first month's payment as the representative value
+      monthlyLoanPayment = calculateEqualPrincipal(principal, data.interestRate, data.loanTermYears, 1);
     } else {
       monthlyLoanPayment = calculateEqualPayment(principal, data.interestRate, data.loanTermYears);
     }

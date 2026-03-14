@@ -1,5 +1,6 @@
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
+import { GlossaryTooltip } from "#/components/shared/Tooltip";
 import type { BankType, EnergyPerformance, InterestType, RepaymentMethod } from "#/lib/types";
 
 interface LoanSectionProps {
@@ -18,6 +19,12 @@ const INTEREST_TYPE_LABELS: Record<InterestType, string> = {
   fixed: "固定",
   variable: "変動",
   flat35: "フラット35",
+};
+
+const INTEREST_TYPE_DEFAULTS: Record<InterestType, number> = {
+  fixed: 1.5,
+  variable: 0.5,
+  flat35: 1.8,
 };
 
 const REPAYMENT_METHOD_LABELS: Record<RepaymentMethod, string> = {
@@ -63,7 +70,10 @@ export function LoanSection({
               <button
                 key={type}
                 type="button"
-                onClick={() => onChange("interestType", type)}
+                onClick={() => {
+                  onChange("interestType", type);
+                  onChange("interestRate", INTEREST_TYPE_DEFAULTS[type]);
+                }}
                 className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
                   i > 0 ? "border-l border-input" : ""
                 } ${
@@ -72,7 +82,9 @@ export function LoanSection({
                     : "bg-white text-foreground hover:bg-purple-50"
                 }`}
               >
-                {INTEREST_TYPE_LABELS[type]}
+                <GlossaryTooltip termKey={type === "fixed" ? "fixed_rate" : type === "variable" ? "variable_rate" : "flat35"}>
+                  {INTEREST_TYPE_LABELS[type]}
+                </GlossaryTooltip>
               </button>
             ))}
           </div>
@@ -162,7 +174,9 @@ export function LoanSection({
                     : "bg-white text-foreground hover:bg-purple-50"
                 }`}
               >
-                {REPAYMENT_METHOD_LABELS[method]}
+                <GlossaryTooltip termKey={method === "equal_payment" ? "equal_payment" : "equal_principal"}>
+                  {REPAYMENT_METHOD_LABELS[method]}
+                </GlossaryTooltip>
               </button>
             ))}
           </div>

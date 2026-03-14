@@ -120,8 +120,8 @@ export const DEFAULT_LOAN_INPUT: LoanInput = {
   repaymentMethod: "equal_payment",
   bonusPayment: 0,
   bankType: "online",
-  maintenanceFee: 12000,
-  repairReserve: 15000,
+  maintenanceFee: 15000,  // 管理費
+  repairReserve: 12000,   // 修繕積立金
   propertyTax: 10,
   energyPerformance: "energy_standard",
   isChildRearingHousehold: false,

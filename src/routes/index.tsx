@@ -30,6 +30,7 @@ function SimulatorPage() {
 
   const [result, setResult] = useState<LoanResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Auto-calculate if URL params were provided
   useEffect(() => {
@@ -44,11 +45,13 @@ function SimulatorPage() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const res = await calculateLoan({ data: input });
       setResult(res);
     } catch (err) {
       console.error("Calculation error:", err);
+      setError("計算中にエラーが発生しました。入力値を確認してください。");
     } finally {
       setIsLoading(false);
     }
@@ -72,6 +75,11 @@ function SimulatorPage() {
           />
         </div>
         <div>
+          {error && (
+            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
           <ResultPanel result={result} />
         </div>
       </div>

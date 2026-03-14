@@ -1,5 +1,6 @@
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
+import { GlossaryTooltip } from "#/components/shared/Tooltip";
 
 interface MaintenanceSectionProps {
   maintenanceFee: number;
@@ -24,7 +25,7 @@ export function MaintenanceSection({
         {/* 管理費 */}
         <div className="space-y-1.5">
           <Label htmlFor="maintenanceFee" className="text-xs text-muted-foreground">
-            管理費（月額）
+            <GlossaryTooltip termKey="maintenance_fee">管理費</GlossaryTooltip>（月額）
           </Label>
           <div className="relative">
             <Input
@@ -48,7 +49,7 @@ export function MaintenanceSection({
         {/* 修繕積立金 */}
         <div className="space-y-1.5">
           <Label htmlFor="repairReserve" className="text-xs text-muted-foreground">
-            修繕積立金（月額）
+            <GlossaryTooltip termKey="repair_reserve">修繕積立金</GlossaryTooltip>（月額）
           </Label>
           <div className="relative">
             <Input

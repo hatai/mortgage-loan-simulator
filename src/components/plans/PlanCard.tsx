@@ -1,5 +1,7 @@
-import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Trash2, Check, X } from "lucide-react";
 import { Button } from "#/components/ui/button";
+import { Input } from "#/components/ui/input";
 import type { SavedPlan } from "#/lib/types";
 
 function formatManYen(amount: number): string {
@@ -9,18 +11,72 @@ function formatManYen(amount: number): string {
 interface PlanCardProps {
   plan: SavedPlan;
   onDelete: (id: string) => void;
+  onRename?: (id: string, name: string) => void;
   onSelect?: (id: string) => void;
   selected?: boolean;
 }
 
-export function PlanCard({ plan, onDelete, onSelect, selected }: PlanCardProps) {
+export function PlanCard({ plan, onDelete, onRename, onSelect, selected }: PlanCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState(plan.name);
+
+  const handleRenameConfirm = () => {
+    const trimmed = editName.trim();
+    if (trimmed && trimmed !== plan.name && onRename) {
+      onRename(plan.id, trimmed);
+    } else {
+      setEditName(plan.name);
+    }
+    setIsEditing(false);
+  };
+
+  const handleRenameCancel = () => {
+    setEditName(plan.name);
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleRenameConfirm();
+    } else if (e.key === "Escape") {
+      handleRenameCancel();
+    }
+  };
+
   return (
     <div
       className={`rounded-xl border p-4 transition ${selected ? "border-primary bg-primary/5" : "bg-card"}`}
     >
       <div className="mb-2 flex items-start justify-between">
-        <div>
-          <h3 className="font-semibold">{plan.name}</h3>
+        <div className="flex-1 min-w-0">
+          {isEditing ? (
+            <div className="flex items-center gap-1">
+              <Input
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="h-7 text-sm font-semibold"
+                autoFocus
+              />
+              <Button variant="ghost" size="icon-xs" onClick={handleRenameConfirm}>
+                <Check className="size-3.5 text-green-600" />
+              </Button>
+              <Button variant="ghost" size="icon-xs" onClick={handleRenameCancel}>
+                <X className="size-3.5 text-muted-foreground" />
+              </Button>
+            </div>
+          ) : (
+            <h3
+              className="font-semibold cursor-pointer hover:text-primary transition-colors truncate"
+              title="クリックして名前を変更"
+              onClick={() => {
+                setEditName(plan.name);
+                setIsEditing(true);
+              }}
+            >
+              {plan.name}
+            </h3>
+          )}
           <p className="text-xs text-muted-foreground">
             {new Date(plan.createdAt).toLocaleDateString("ja-JP")}
           </p>
