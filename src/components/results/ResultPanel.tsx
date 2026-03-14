@@ -15,7 +15,7 @@ interface ResultPanelProps {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 px-6 py-12">
+    <div className="flex flex-col items-center justify-center h-full min-h-[400px] rounded-2xl border border-border bg-card px-6 py-12">
       <div className="text-5xl mb-4">🏠</div>
       <h2 className="text-lg font-semibold text-gray-600 mb-2">シミュレーション結果</h2>
       <p className="text-sm text-muted-foreground text-center max-w-xs">

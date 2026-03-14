@@ -64,7 +64,9 @@ export function LoanSection({
       <div className="space-y-4">
         {/* 金利タイプ */}
         <div className="space-y-1.5">
-          <Label className="text-xs text-muted-foreground">金利タイプ</Label>
+          <Label className="text-xs text-muted-foreground">
+            <GlossaryTooltip termKey="fixed_rate">金利タイプ</GlossaryTooltip>
+          </Label>
           <div className="flex rounded-md overflow-hidden border border-input">
             {(["fixed", "variable", "flat35"] as InterestType[]).map((type, i) => (
               <button
@@ -82,9 +84,7 @@ export function LoanSection({
                     : "bg-white text-foreground hover:bg-purple-50"
                 }`}
               >
-                <GlossaryTooltip termKey={type === "fixed" ? "fixed_rate" : type === "variable" ? "variable_rate" : "flat35"}>
-                  {INTEREST_TYPE_LABELS[type]}
-                </GlossaryTooltip>
+                {INTEREST_TYPE_LABELS[type]}
               </button>
             ))}
           </div>
@@ -159,7 +159,9 @@ export function LoanSection({
 
         {/* 返済方式 */}
         <div className="space-y-1.5">
-          <Label className="text-xs text-muted-foreground">返済方式</Label>
+          <Label className="text-xs text-muted-foreground">
+            <GlossaryTooltip termKey="equal_payment">返済方式</GlossaryTooltip>
+          </Label>
           <div className="flex rounded-md overflow-hidden border border-input">
             {(["equal_payment", "equal_principal"] as RepaymentMethod[]).map((method, i) => (
               <button
@@ -174,9 +176,7 @@ export function LoanSection({
                     : "bg-white text-foreground hover:bg-purple-50"
                 }`}
               >
-                <GlossaryTooltip termKey={method === "equal_payment" ? "equal_payment" : "equal_principal"}>
-                  {REPAYMENT_METHOD_LABELS[method]}
-                </GlossaryTooltip>
+                {REPAYMENT_METHOD_LABELS[method]}
               </button>
             ))}
           </div>
