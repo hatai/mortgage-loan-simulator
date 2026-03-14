@@ -17,7 +17,7 @@ export function ClosingCostsSection({ result }: ClosingCostsSectionProps) {
   const { items, total, totalWithDownPayment } = closingCosts;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm">
       <details>
         <summary className="flex items-center justify-between px-5 py-4 cursor-pointer select-none list-none group">
           <div className="flex items-center gap-2">
@@ -76,12 +76,12 @@ export function ClosingCostsSection({ result }: ClosingCostsSectionProps) {
           </div>
 
           {/* 必要自己資金 */}
-          <div className="rounded-lg bg-blue-50 border border-blue-100 px-4 py-3 flex items-center justify-between">
+          <div className="rounded-lg bg-gray-50 border border-gray-100 px-4 py-3 flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold text-blue-900">必要自己資金</p>
-              <p className="text-xs text-blue-600 mt-0.5">頭金 + 諸費用の合計</p>
+              <p className="text-sm font-semibold text-gray-900">必要自己資金</p>
+              <p className="text-xs text-gray-500 mt-0.5">頭金 + 諸費用の合計</p>
             </div>
-            <p className="text-xl font-bold text-blue-900">{formatManYen(totalWithDownPayment)}</p>
+            <p className="text-xl font-bold text-gray-900">{formatManYen(totalWithDownPayment)}</p>
           </div>
 
           <p className="mt-3 text-xs text-muted-foreground">

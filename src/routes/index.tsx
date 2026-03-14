@@ -64,7 +64,7 @@ function SimulatorPage() {
   };
 
   return (
-    <main className="mx-auto max-w-7xl px-4 pb-8 pt-6 bg-muted/30 min-h-screen print:max-w-none print:px-0 print:pt-0 print:bg-white">
+    <main className="mx-auto max-w-7xl px-4 pb-8 pt-6 bg-white min-h-screen print:max-w-none print:px-0 print:pt-0 print:bg-white">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
         <div className="print:hidden">
           <InputPanel

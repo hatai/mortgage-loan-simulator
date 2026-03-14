@@ -24,7 +24,7 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
   const newMonthlyPayment = prepayment.newMonthlyPayment;
 
   return (
-    <div className="bg-white rounded-xl border border-blue-100 shadow-sm p-5">
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5">
       <h3 className="text-sm font-semibold text-gray-700 mb-4">繰り上げ返済効果</h3>
 
       <div className="overflow-x-auto">
@@ -33,8 +33,8 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
             <tr className="text-xs text-muted-foreground border-b border-gray-100">
               <th className="text-left pb-2 font-medium">項目</th>
               <th className="text-right pb-2 font-medium">繰り上げなし</th>
-              <th className="text-right pb-2 font-medium text-blue-600">繰り上げあり</th>
-              <th className="text-right pb-2 font-medium text-green-600">差額</th>
+              <th className="text-right pb-2 font-medium text-gray-700">繰り上げあり</th>
+              <th className="text-right pb-2 font-medium text-gray-700">差額</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -43,16 +43,16 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
               <td className="py-2.5 text-right font-medium text-gray-800">
                 {formatManYen(originalTotal)}
               </td>
-              <td className="py-2.5 text-right font-medium text-blue-700">
+              <td className="py-2.5 text-right font-medium text-gray-800">
                 {formatManYen(newTotal)}
               </td>
-              <td className="py-2.5 text-right font-bold text-green-600">-{formatManYen(saved)}</td>
+              <td className="py-2.5 text-right font-bold text-gray-900">-{formatManYen(saved)}</td>
             </tr>
             {newMonthlyPayment !== undefined && (
               <tr>
                 <td className="py-2.5 text-gray-600">月々返済額</td>
                 <td className="py-2.5 text-right font-medium text-gray-800">—</td>
-                <td className="py-2.5 text-right font-medium text-blue-700">
+                <td className="py-2.5 text-right font-medium text-gray-800">
                   {formatYen(newMonthlyPayment)}
                 </td>
                 <td className="py-2.5 text-right text-gray-400">軽減</td>
@@ -62,10 +62,10 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
               <tr>
                 <td className="py-2.5 text-gray-600">返済期間短縮</td>
                 <td className="py-2.5 text-right font-medium text-gray-800">—</td>
-                <td className="py-2.5 text-right font-medium text-blue-700">
+                <td className="py-2.5 text-right font-medium text-gray-800">
                   {Math.floor(shortenedMonths / 12)}年{shortenedMonths % 12}ヶ月短縮
                 </td>
-                <td className="py-2.5 text-right text-green-600 font-semibold">
+                <td className="py-2.5 text-right text-gray-900 font-semibold">
                   -{shortenedMonths}ヶ月
                 </td>
               </tr>
@@ -75,9 +75,9 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
       </div>
 
       {/* ハイライト */}
-      <div className="mt-4 rounded-lg bg-green-50 border border-green-100 px-4 py-3 flex items-center justify-between">
-        <span className="text-sm text-green-800 font-medium">繰り上げ返済による節約効果</span>
-        <span className="text-xl font-bold text-green-700">{formatManYen(saved)}</span>
+      <div className="mt-4 rounded-lg bg-gray-50 border border-gray-100 px-4 py-3 flex items-center justify-between">
+        <span className="text-sm text-gray-700 font-medium">繰り上げ返済による節約効果</span>
+        <span className="text-xl font-bold text-gray-900">{formatManYen(saved)}</span>
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
   };
 
   return (
-    <div className="rounded-xl bg-white shadow-sm border-l-4 border-l-rose-500">
+    <div className="rounded-lg bg-white border border-gray-100 shadow-sm">
       {/* アコーディオンヘッダー */}
       <button
         type="button"
@@ -52,7 +52,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
         aria-expanded={isOpen}
       >
         <div>
-          <h2 className="text-sm font-semibold text-rose-600 uppercase tracking-wide">
+          <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider">
             繰り上げ返済
           </h2>
           {!isOpen && prepayments.length > 0 && (
@@ -60,7 +60,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
           )}
         </div>
         <ChevronDownIcon
-          className={`size-4 text-rose-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`size-4 text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -76,16 +76,16 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
           {prepayments.map((item, index) => (
             <div
               key={index}
-              className="rounded-lg border border-rose-100 bg-rose-50/40 p-4 space-y-3 relative"
+              className="rounded-lg border border-gray-100 bg-gray-50/40 p-4 space-y-3 relative"
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-rose-600">
+                <span className="text-xs font-semibold text-gray-600">
                   繰り上げ返済 {index + 1}
                 </span>
                 <button
                   type="button"
                   onClick={() => handleRemove(index)}
-                  className="text-rose-400 hover:text-rose-600 transition-colors"
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
                   aria-label="削除"
                 >
                   <Trash2Icon className="size-4" />
@@ -132,18 +132,18 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
               {/* 方式 */}
               <div className="space-y-1">
                 <Label className="text-xs text-muted-foreground">方式</Label>
-                <div className="flex rounded-md overflow-hidden border border-input">
+                <div className="flex rounded-lg overflow-hidden border border-gray-200">
                   {(["shorten_term", "reduce_payment"] as PrepaymentType[]).map((type, i) => (
                     <button
                       key={type}
                       type="button"
                       onClick={() => handleItemChange(index, "type", type)}
                       className={`flex-1 py-1.5 text-xs font-medium transition-colors ${
-                        i > 0 ? "border-l border-input" : ""
+                        i > 0 ? "border-l border-gray-200" : ""
                       } ${
                         item.type === type
-                          ? "bg-rose-500 text-white"
-                          : "bg-white text-foreground hover:bg-rose-50"
+                          ? "bg-slate-900 text-white"
+                          : "bg-white text-gray-500 hover:text-gray-700"
                       }`}
                     >
                       {PREPAYMENT_TYPE_LABELS[type]}
@@ -160,7 +160,7 @@ export function PrepaymentSection({ prepayments, onChange }: PrepaymentSectionPr
               variant="outline"
               size="sm"
               onClick={handleAdd}
-              className="w-full border-rose-200 text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+              className="w-full border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-700"
             >
               <PlusIcon className="size-4" />
               繰り上げ返済を追加

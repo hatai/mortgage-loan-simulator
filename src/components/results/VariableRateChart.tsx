@@ -49,7 +49,7 @@ export function VariableRateChart({ result }: VariableRateChartProps) {
   });
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5">
       <h3 className="text-sm font-semibold text-gray-700 mb-1">変動金利シナリオ別の月々返済額</h3>
       <p className="text-xs text-muted-foreground mb-4">
         楽観・基準・悲観の3シナリオで将来の返済額変化をシミュレーションしています。

@@ -13,7 +13,7 @@ export function CalculateButton({ onClick, isLoading }: CalculateButtonProps) {
       onClick={onClick}
       disabled={isLoading}
       size="lg"
-      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold shadow-md transition-all"
+      className="w-full bg-slate-900 text-white hover:bg-slate-800 rounded-lg h-12 text-base font-medium transition-colors"
     >
       {isLoading ? (
         <>

@@ -14,20 +14,20 @@ const TIERS = [
     ratio: 20,
     label: "安心",
     description: "余裕をもった返済",
-    bgClass: "bg-green-50",
-    borderClass: "border-green-200",
-    badgeClass: "bg-green-100 text-green-800",
-    valueClass: "text-green-900",
-    barClass: "bg-green-500",
+    bgClass: "bg-emerald-50",
+    borderClass: "border-emerald-100",
+    badgeClass: "bg-emerald-50 text-emerald-700 border border-emerald-100",
+    valueClass: "text-emerald-700",
+    barClass: "bg-emerald-500",
   },
   {
     ratio: 25,
     label: "適正",
     description: "標準的な返済比率",
     bgClass: "bg-amber-50",
-    borderClass: "border-amber-200",
-    badgeClass: "bg-amber-100 text-amber-800",
-    valueClass: "text-amber-900",
+    borderClass: "border-amber-100",
+    badgeClass: "bg-amber-50 text-amber-700 border border-amber-100",
+    valueClass: "text-amber-700",
     barClass: "bg-amber-500",
   },
   {
@@ -35,9 +35,9 @@ const TIERS = [
     label: "注意",
     description: "やや負担が大きい",
     bgClass: "bg-red-50",
-    borderClass: "border-red-200",
-    badgeClass: "bg-red-100 text-red-800",
-    valueClass: "text-red-900",
+    borderClass: "border-red-100",
+    badgeClass: "bg-red-50 text-red-700 border border-red-100",
+    valueClass: "text-red-700",
     barClass: "bg-red-500",
   },
 ] as const;
@@ -46,7 +46,7 @@ export function IncomeGuideline({ result }: IncomeGuidelineProps) {
   const { requiredIncome } = result;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-5">
       <h3 className="text-sm font-semibold text-gray-700 mb-1">
         <GlossaryTooltip termKey="repayment_ratio">返済比率</GlossaryTooltip>別の目安年収
       </h3>

@@ -19,7 +19,7 @@ export function RentComparisonInput({
   const isEnabled = currentRent !== undefined && currentRent > 0;
 
   return (
-    <div className="rounded-xl bg-white shadow-sm border-l-4 border-l-cyan-500">
+    <div className="rounded-lg bg-white border border-gray-100 shadow-sm">
       {/* アコーディオンヘッダー */}
       <button
         type="button"
@@ -28,7 +28,7 @@ export function RentComparisonInput({
         aria-expanded={isOpen}
       >
         <div>
-          <h2 className="text-sm font-semibold text-cyan-600 uppercase tracking-wide">賃貸比較</h2>
+          <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider">賃貸比較</h2>
           {!isOpen && (
             <p className="text-xs text-muted-foreground mt-0.5">
               {isEnabled ? `家賃 ${(currentRent ?? 0).toLocaleString("ja-JP")} 円/月` : "設定なし"}
@@ -36,7 +36,7 @@ export function RentComparisonInput({
           )}
         </div>
         <ChevronDownIcon
-          className={`size-4 text-cyan-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`size-4 text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -106,16 +106,16 @@ export function RentComparisonInput({
 
           {/* 家賃設定サマリー */}
           {isEnabled && (
-            <div className="rounded-md bg-cyan-50 px-4 py-3 space-y-1">
+            <div className="rounded-md bg-gray-50 px-4 py-3 space-y-1">
               <div className="flex justify-between items-center">
-                <span className="text-xs text-cyan-700 font-medium">月額家賃</span>
-                <span className="text-sm font-bold text-cyan-700">
+                <span className="text-xs text-gray-700 font-medium">月額家賃</span>
+                <span className="text-sm font-bold text-gray-700">
                   {(currentRent ?? 0).toLocaleString("ja-JP")} 円
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-xs text-cyan-700">年間上昇率</span>
-                <span className="text-sm text-cyan-700">{rentIncreaseRate ?? 0} %</span>
+                <span className="text-xs text-gray-700">年間上昇率</span>
+                <span className="text-sm text-gray-700">{rentIncreaseRate ?? 0} %</span>
               </div>
             </div>
           )}

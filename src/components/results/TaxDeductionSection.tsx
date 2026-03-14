@@ -18,12 +18,12 @@ export function TaxDeductionSection({ result }: TaxDeductionSectionProps) {
     taxDeduction;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
+    <div className="bg-white rounded-lg border border-gray-100 shadow-sm">
       <details>
         <summary className="flex items-center justify-between px-5 py-4 cursor-pointer select-none list-none group">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-semibold text-gray-700">住宅ローン控除（年次一覧）</h3>
-            <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-medium">
               13年間合計 {formatManYen(totalDeduction)}
             </span>
           </div>
@@ -40,13 +40,13 @@ export function TaxDeductionSection({ result }: TaxDeductionSectionProps) {
         <div className="px-5 pb-5">
           {/* 概要 */}
           <div className="mb-4 grid grid-cols-2 gap-3">
-            <div className="rounded-lg bg-amber-50 border border-amber-100 px-4 py-3">
-              <p className="text-xs text-amber-700 mb-0.5">借入限度額</p>
-              <p className="text-base font-bold text-amber-900">{formatManYen(borrowingLimit)}</p>
+            <div className="rounded-lg bg-gray-50 border border-gray-100 px-4 py-3">
+              <p className="text-xs text-gray-500 mb-0.5">借入限度額</p>
+              <p className="text-base font-bold text-gray-900">{formatManYen(borrowingLimit)}</p>
             </div>
-            <div className="rounded-lg bg-green-50 border border-green-100 px-4 py-3">
-              <p className="text-xs text-green-700 mb-0.5">控除後実質総返済額</p>
-              <p className="text-base font-bold text-green-900">
+            <div className="rounded-lg bg-gray-50 border border-gray-100 px-4 py-3">
+              <p className="text-xs text-gray-500 mb-0.5">控除後実質総返済額</p>
+              <p className="text-base font-bold text-gray-900">
                 {formatManYen(effectiveTotalRepayment)}
               </p>
             </div>
@@ -67,18 +67,18 @@ export function TaxDeductionSection({ result }: TaxDeductionSectionProps) {
                   <tr key={year} className="hover:bg-gray-50/50">
                     <td className="px-3 py-2 text-gray-600">{year}年目</td>
                     <td className="px-3 py-2 text-right text-gray-700">{formatManYen(balance)}</td>
-                    <td className="px-3 py-2 text-right font-semibold text-amber-700">
+                    <td className="px-3 py-2 text-right font-semibold text-gray-800">
                       {formatYen(amount)}
                     </td>
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="bg-amber-50 border-t border-amber-100">
+              <tfoot className="bg-gray-50 border-t border-gray-100">
                 <tr>
-                  <td className="px-3 py-2 font-semibold text-amber-800" colSpan={2}>
+                  <td className="px-3 py-2 font-semibold text-gray-800" colSpan={2}>
                     控除総額
                   </td>
-                  <td className="px-3 py-2 text-right font-bold text-amber-900">
+                  <td className="px-3 py-2 text-right font-bold text-gray-900">
                     {formatManYen(totalDeduction)}
                   </td>
                 </tr>

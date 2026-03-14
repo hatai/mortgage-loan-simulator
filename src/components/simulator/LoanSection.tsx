@@ -56,18 +56,18 @@ export function LoanSection({
   onChange,
 }: LoanSectionProps) {
   return (
-    <div className="rounded-xl bg-white shadow-sm border-l-4 border-l-purple-500 p-5">
-      <h2 className="text-sm font-semibold text-purple-600 mb-4 uppercase tracking-wide">
+    <div className="rounded-lg bg-white border border-gray-100 shadow-sm p-5">
+      <h2 className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-4">
         ローン条件
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {/* 金利タイプ */}
         <div className="space-y-1.5">
           <Label className="text-xs text-muted-foreground">
             <GlossaryTooltip termKey="fixed_rate">金利タイプ</GlossaryTooltip>
           </Label>
-          <div className="flex rounded-md overflow-hidden border border-input">
+          <div className="flex rounded-lg overflow-hidden border border-gray-200">
             {(["fixed", "variable", "flat35"] as InterestType[]).map((type, i) => (
               <button
                 key={type}
@@ -79,11 +79,11 @@ export function LoanSection({
                   });
                 }}
                 className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
-                  i > 0 ? "border-l border-input" : ""
+                  i > 0 ? "border-l border-gray-200" : ""
                 } ${
                   interestType === type
-                    ? "bg-purple-500 text-white"
-                    : "bg-white text-foreground hover:bg-purple-50"
+                    ? "bg-slate-900 text-white"
+                    : "bg-white text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {INTEREST_TYPE_LABELS[type]}
@@ -95,18 +95,18 @@ export function LoanSection({
         {/* 銀行タイプ */}
         <div className="space-y-1.5">
           <Label className="text-xs text-muted-foreground">銀行タイプ</Label>
-          <div className="flex rounded-md overflow-hidden border border-input">
+          <div className="flex rounded-lg overflow-hidden border border-gray-200">
             {(["online", "major"] as BankType[]).map((type, i) => (
               <button
                 key={type}
                 type="button"
                 onClick={() => onChange("bankType", type)}
                 className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
-                  i > 0 ? "border-l border-input" : ""
+                  i > 0 ? "border-l border-gray-200" : ""
                 } ${
                   bankType === type
-                    ? "bg-purple-500 text-white"
-                    : "bg-white text-foreground hover:bg-purple-50"
+                    ? "bg-slate-900 text-white"
+                    : "bg-white text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {BANK_TYPE_LABELS[type]}
@@ -164,18 +164,18 @@ export function LoanSection({
           <Label className="text-xs text-muted-foreground">
             <GlossaryTooltip termKey="equal_payment">返済方式</GlossaryTooltip>
           </Label>
-          <div className="flex rounded-md overflow-hidden border border-input">
+          <div className="flex rounded-lg overflow-hidden border border-gray-200">
             {(["equal_payment", "equal_principal"] as RepaymentMethod[]).map((method, i) => (
               <button
                 key={method}
                 type="button"
                 onClick={() => onChange("repaymentMethod", method)}
                 className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
-                  i > 0 ? "border-l border-input" : ""
+                  i > 0 ? "border-l border-gray-200" : ""
                 } ${
                   repaymentMethod === method
-                    ? "bg-purple-500 text-white"
-                    : "bg-white text-foreground hover:bg-purple-50"
+                    ? "bg-slate-900 text-white"
+                    : "bg-white text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {REPAYMENT_METHOD_LABELS[method]}
@@ -216,8 +216,8 @@ export function LoanSection({
                 onClick={() => onChange("energyPerformance", opt.value)}
                 className={`py-1.5 px-2 text-xs font-medium rounded-md border transition-colors ${
                   energyPerformance === opt.value
-                    ? "bg-purple-500 text-white border-purple-500"
-                    : "bg-white text-foreground border-input hover:bg-purple-50"
+                    ? "bg-slate-900 text-white border-slate-900"
+                    : "bg-white text-gray-500 border-gray-200 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
                 {opt.label}
@@ -240,8 +240,8 @@ export function LoanSection({
             role="switch"
             aria-checked={isChildRearingHousehold}
             onClick={() => onChange("isChildRearingHousehold", !isChildRearingHousehold)}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${
-              isChildRearingHousehold ? "bg-purple-500" : "bg-gray-200"
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 ${
+              isChildRearingHousehold ? "bg-slate-900" : "bg-gray-200"
             }`}
           >
             <span
