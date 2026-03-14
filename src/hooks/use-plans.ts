@@ -1,6 +1,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 import type { LoanInput, LoanResult, SavedPlan } from "../lib/types";
 import {
+  STORAGE_KEY,
   loadPlans,
   savePlan as storageSave,
   deletePlan as storageDelete,
@@ -8,7 +9,6 @@ import {
   generatePlanId,
 } from "../lib/plans-storage";
 
-const STORAGE_KEY = "mortgage-simulator-plans";
 const listeners = new Set<() => void>();
 let cachedRaw: string | null = null;
 let cachedPlans: SavedPlan[] = [];
@@ -25,11 +25,15 @@ function notify() {
 
 function getSnapshot(): SavedPlan[] {
   if (typeof window === "undefined") return [];
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (raw === cachedRaw) return cachedPlans;
-  cachedRaw = raw;
-  cachedPlans = raw ? JSON.parse(raw) : [];
-  return cachedPlans;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw === cachedRaw) return cachedPlans;
+    cachedRaw = raw;
+    cachedPlans = raw ? JSON.parse(raw) : [];
+    return cachedPlans;
+  } catch {
+    return [];
+  }
 }
 
 function getServerSnapshot(): SavedPlan[] {

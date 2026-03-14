@@ -110,13 +110,13 @@ export function calculatePrepaymentEffect(
     }
 
     // Regular monthly payment
-    const interest = balance * monthlyRate;
+    const interest = Math.round(balance * monthlyRate);
     let principalPayment: number;
 
     if (currentMonthlyPayment >= balance + interest) {
       // Final payment: pay off the rest
       principalPayment = balance;
-      newTotal += balance + Math.round(interest);
+      newTotal += balance + interest;
       balance = 0;
       // Calculate how many months early we finished
       const usedMonths = m;
@@ -125,7 +125,7 @@ export function calculatePrepaymentEffect(
       }
       break;
     } else {
-      principalPayment = currentMonthlyPayment - Math.round(interest);
+      principalPayment = currentMonthlyPayment - interest;
       newTotal += currentMonthlyPayment;
       balance -= principalPayment;
     }

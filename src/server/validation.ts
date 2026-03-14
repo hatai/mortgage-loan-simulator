@@ -26,7 +26,7 @@ export const loanInputSchema = z
     currentRent: z.number().min(0).max(500000).optional(),
     rentIncreaseRate: z.number().min(0).max(5).optional(),
   })
-  .refine((data) => data.downPayment <= data.propertyPrice, {
-    message: "頭金は物件価格以下にしてください",
+  .refine((data) => data.downPayment < data.propertyPrice, {
+    message: "頭金は物件価格未満にしてください（借入額が必要です）",
     path: ["downPayment"],
   });

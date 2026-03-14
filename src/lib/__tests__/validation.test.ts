@@ -60,6 +60,11 @@ describe("loanInputSchema", () => {
     expect(result.success).toBe(false);
   });
 
+  test("頭金が物件価格と同額でエラー（借入額0は不可）", () => {
+    const result = loanInputSchema.safeParse({ ...validInput, downPayment: 3000 });
+    expect(result.success).toBe(false);
+  });
+
   test("繰り上げ返済は最大5件", () => {
     const prepayments = Array.from({ length: 6 }, (_, i) => ({
       year: i + 1,

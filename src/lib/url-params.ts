@@ -88,11 +88,17 @@ export function encodeParams(input: LoanInput): string {
 export function decodeParams(queryString: string): LoanInput {
   const params = new URLSearchParams(queryString);
 
-  const parseNumber = (key: string, defaultValue: number): number => {
+  const parseNumber = (
+    key: string,
+    defaultValue: number,
+    min = 0,
+    max = Infinity,
+  ): number => {
     const raw = params.get(key);
     if (raw === null) return defaultValue;
     const parsed = Number(raw);
-    return Number.isFinite(parsed) ? parsed : defaultValue;
+    if (!Number.isFinite(parsed) || parsed < min || parsed > max) return defaultValue;
+    return parsed;
   };
 
   const parseEnum = <T extends string>(key: string, valid: T[], defaultValue: T): T => {
@@ -109,24 +115,25 @@ export function decodeParams(queryString: string): LoanInput {
     return defaultValue;
   };
 
-  const parseOptionalNumber = (key: string): number | undefined => {
+  const parseOptionalNumber = (key: string, min = 0, max = Infinity): number | undefined => {
     const raw = params.get(key);
     if (raw === null) return undefined;
     const parsed = Number(raw);
-    return Number.isFinite(parsed) ? parsed : undefined;
+    if (!Number.isFinite(parsed) || parsed < min || parsed > max) return undefined;
+    return parsed;
   };
 
   return {
-    propertyPrice: parseNumber("p", DEFAULT_LOAN_INPUT.propertyPrice),
-    downPayment: parseNumber("d", DEFAULT_LOAN_INPUT.downPayment),
+    propertyPrice: parseNumber("p", DEFAULT_LOAN_INPUT.propertyPrice, 100, 50000),
+    downPayment: parseNumber("d", DEFAULT_LOAN_INPUT.downPayment, 0, 50000),
     interestType: parseEnum("t", VALID_INTEREST_TYPES, DEFAULT_LOAN_INPUT.interestType),
-    interestRate: parseNumber("r", DEFAULT_LOAN_INPUT.interestRate),
-    loanTermYears: parseNumber("y", DEFAULT_LOAN_INPUT.loanTermYears),
+    interestRate: parseNumber("r", DEFAULT_LOAN_INPUT.interestRate, 0.01, 15),
+    loanTermYears: parseNumber("y", DEFAULT_LOAN_INPUT.loanTermYears, 1, 50),
     repaymentMethod: parseEnum("m", VALID_REPAYMENT_METHODS, DEFAULT_LOAN_INPUT.repaymentMethod),
-    bonusPayment: parseNumber("b", DEFAULT_LOAN_INPUT.bonusPayment),
-    maintenanceFee: parseNumber("mf", DEFAULT_LOAN_INPUT.maintenanceFee),
-    repairReserve: parseNumber("rr", DEFAULT_LOAN_INPUT.repairReserve),
-    propertyTax: parseNumber("pt", DEFAULT_LOAN_INPUT.propertyTax),
+    bonusPayment: parseNumber("b", DEFAULT_LOAN_INPUT.bonusPayment, 0, 50000),
+    maintenanceFee: parseNumber("mf", DEFAULT_LOAN_INPUT.maintenanceFee, 0, 100000),
+    repairReserve: parseNumber("rr", DEFAULT_LOAN_INPUT.repairReserve, 0, 100000),
+    propertyTax: parseNumber("pt", DEFAULT_LOAN_INPUT.propertyTax, 0, 100),
     propertyType: parseEnum("ptype", VALID_PROPERTY_TYPES, DEFAULT_LOAN_INPUT.propertyType),
     bankType: parseEnum("bank", VALID_BANK_TYPES, DEFAULT_LOAN_INPUT.bankType),
     energyPerformance: parseEnum(
@@ -135,8 +142,8 @@ export function decodeParams(queryString: string): LoanInput {
       DEFAULT_LOAN_INPUT.energyPerformance,
     ),
     isChildRearingHousehold: parseBoolean("child", DEFAULT_LOAN_INPUT.isChildRearingHousehold),
-    currentRent: parseOptionalNumber("rent"),
-    rentIncreaseRate: parseOptionalNumber("ri"),
+    currentRent: parseOptionalNumber("rent", 0, 500000),
+    rentIncreaseRate: parseOptionalNumber("ri", 0, 5),
     prepayments: [],
   };
 }

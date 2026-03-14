@@ -1,4 +1,4 @@
-import type { EnergyPerformance, PropertyType, TaxDeduction } from "./types";
+import type { EnergyPerformance, PropertyType, RepaymentMethod, TaxDeduction } from "./types";
 import { generateSchedule } from "./loan-calculator";
 
 /** Deduction rate for 2026 tax reform (令和8年度): 0.7% */
@@ -68,6 +68,7 @@ export function calculateTaxDeduction(
   propertyType: PropertyType,
   energyPerformance: EnergyPerformance,
   isChildRearing: boolean,
+  repaymentMethod: RepaymentMethod = "equal_payment",
 ): TaxDeduction {
   const borrowingLimit = getBorrowingLimit(propertyType, energyPerformance, isChildRearing);
 
@@ -81,7 +82,7 @@ export function calculateTaxDeduction(
     };
   }
 
-  const monthlySchedule = generateSchedule(principal, annualRate, years, "equal_payment");
+  const monthlySchedule = generateSchedule(principal, annualRate, years, repaymentMethod);
 
   // Build year-end balance lookup: year -> balance at end of that year
   const yearEndBalances = new Map<number, number>();

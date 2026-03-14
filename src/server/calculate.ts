@@ -83,6 +83,7 @@ export const calculateLoan = createServerFn({ method: "POST" })
       data.propertyType,
       data.energyPerformance,
       data.isChildRearingHousehold,
+      data.repaymentMethod,
     );
 
     // 諸費用

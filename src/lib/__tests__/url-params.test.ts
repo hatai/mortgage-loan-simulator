@@ -174,8 +174,8 @@ describe("decodeParams", () => {
   });
 
   test("decodes bonusPayment", () => {
-    const result = decodeParams("b=500000");
-    expect(result.bonusPayment).toBe(500000);
+    const result = decodeParams("b=500");
+    expect(result.bonusPayment).toBe(500);
   });
 
   test("decodes maintenanceFee", () => {

@@ -1,6 +1,6 @@
 import type { SavedPlan } from "./types";
 
-const STORAGE_KEY = "mortgage-simulator-plans";
+export const STORAGE_KEY = "mortgage-simulator-plans";
 
 export function loadPlans(): SavedPlan[] {
   if (typeof window === "undefined") return [];
