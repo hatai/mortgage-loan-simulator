@@ -1,4 +1,9 @@
-import type { MonthlyScheduleItem, RepaymentMethod, VariableRateScenario, YearlyScheduleSummary } from "./types";
+import type {
+  MonthlyScheduleItem,
+  RepaymentMethod,
+  VariableRateScenario,
+  YearlyScheduleSummary,
+} from "./types";
 
 /**
  * Calculate equal monthly payment (元利均等返済) using standard PMT formula.
@@ -154,7 +159,8 @@ export function calculateWithBonus(
   } else {
     // PV = PMT * (1 - (1+r)^-n) / r
     bonusPrincipal =
-      (bonusPaymentPerTime * (1 - Math.pow(1 + semiAnnualRate, -semiAnnualPeriods))) / semiAnnualRate;
+      (bonusPaymentPerTime * (1 - Math.pow(1 + semiAnnualRate, -semiAnnualPeriods))) /
+      semiAnnualRate;
   }
 
   // Cap bonus portion at 50% of total principal
@@ -302,7 +308,13 @@ export function calculateVariableRateScenarios(
   customRateIncreases?: RateChange[],
 ): VariableRateScenario[] {
   if (customRateIncreases) {
-    const scenario = runVariableRateScenario("カスタム", principal, initialRate, years, customRateIncreases);
+    const scenario = runVariableRateScenario(
+      "カスタム",
+      principal,
+      initialRate,
+      years,
+      customRateIncreases,
+    );
     return [scenario];
   }
 

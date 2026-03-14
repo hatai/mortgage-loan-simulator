@@ -16,6 +16,7 @@
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.26.0",
     "@faker-js/faker": "^10.3.0",
+    "@rolldown/binding-linux-x64-gnu": "1.0.0-rc.9",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/match-sorter-utils": "latest",
     "@tanstack/react-devtools": "latest",
