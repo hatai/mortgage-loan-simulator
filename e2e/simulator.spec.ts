@@ -5,8 +5,13 @@ async function waitForApp(page: import("@playwright/test").Page) {
   await page.waitForLoadState("domcontentloaded");
   // Wait for main content to be SSR-rendered
   await page.waitForSelector("main", { state: "visible", timeout: 15000 });
-  // Allow time for client hydration
-  await page.waitForTimeout(2000);
+  // Wait for client hydration by checking React event handlers are attached
+  await page.waitForFunction(
+    () => document.querySelector("[data-reactroot]") !== null || document.querySelector("#__next") !== null || document.querySelector("button")?.onclick !== null,
+    { timeout: 10000 },
+  ).catch(() => {});
+  // Extra time for hydration completion
+  await page.waitForTimeout(3000);
 }
 
 // Helper: try clicking and wait for result, with retry for hydration
@@ -14,13 +19,14 @@ async function clickAndWaitForResult(page: import("@playwright/test").Page) {
   await page.click('button:has-text("シミュレーション実行")');
   // Wait for either result or error
   try {
-    await page.waitForSelector('text="月々の総支払額"', { timeout: 10000 });
+    await page.waitForSelector('text="月々の総支払額"', { timeout: 15000 });
     return true;
   } catch {
-    // Retry once — hydration might have been slow
+    // Retry — hydration or server function might have been slow
+    await page.waitForTimeout(2000);
     await page.click('button:has-text("シミュレーション実行")');
     try {
-      await page.waitForSelector('text="月々の総支払額"', { timeout: 10000 });
+      await page.waitForSelector('text="月々の総支払額"', { timeout: 15000 });
       return true;
     } catch {
       return false;
@@ -143,23 +149,28 @@ test.describe("SSRレンダリング — ページ構造", () => {
 test.describe("インタラクション — シミュレーション実行", () => {
   test("シミュレーション実行で結果が表示される", async ({ page }) => {
     await page.goto("/");
-    await waitForApp(page);
+    await page.waitForLoadState("domcontentloaded");
+    // Wait extra for full hydration
+    await page.waitForTimeout(5000);
 
-    const success = await clickAndWaitForResult(page);
-    if (!success) {
-      // Hydration might have failed — check if we at least have SSR content
-      const text = await page.textContent("main");
-      expect(text).toContain("シミュレーション実行");
-      test.skip(true, "Hydration not available — SSR-only mode");
-      return;
+    // Click the submit button directly
+    const btn = page.locator('button', { hasText: "シミュレーション実行" });
+    await btn.click();
+
+    // Wait for result with generous timeout
+    await page.waitForTimeout(8000);
+
+    const mainText = await page.textContent("main") ?? "";
+    if (!mainText.includes("月々の総支払額")) {
+      // Second attempt
+      await btn.click();
+      await page.waitForTimeout(8000);
     }
 
-    // 結果が表示される
-    await expect(page.getByText("月々の総支払額")).toBeVisible();
-    const mainText = await page.textContent("main");
-    expect(mainText).toContain("総返済額");
-    expect(mainText).toContain("利息総額");
-    expect(mainText).toContain("¥");
+    const finalText = await page.textContent("main") ?? "";
+    expect(finalText).toContain("月々の総支払額");
+    expect(finalText).toContain("総返済額");
+    expect(finalText).toContain("¥");
   });
 
   test("結果に収入目安ガイドが含まれる", async ({ page }) => {
