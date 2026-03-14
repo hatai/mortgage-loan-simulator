@@ -14,7 +14,7 @@ import { calculateRentComparison } from "../lib/rent-comparison";
 import type { LoanResult } from "../lib/types";
 
 export const calculateLoan = createServerFn({ method: "POST" })
-  .validator(loanInputSchema)
+  .inputValidator((input: unknown) => loanInputSchema.parse(input))
   .handler(async ({ data }): Promise<LoanResult> => {
     const principalMan = data.propertyPrice - data.downPayment;
     const principal = principalMan * 10_000;
