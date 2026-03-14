@@ -12,7 +12,7 @@ interface LoanSectionProps {
   bankType: BankType;
   energyPerformance: EnergyPerformance;
   isChildRearingHousehold: boolean;
-  onChange: (field: string, value: unknown) => void;
+  onChange: (fieldOrFields: string | Record<string, unknown>, value?: unknown) => void;
 }
 
 const INTEREST_TYPE_LABELS: Record<InterestType, string> = {
@@ -73,8 +73,10 @@ export function LoanSection({
                 key={type}
                 type="button"
                 onClick={() => {
-                  onChange("interestType", type);
-                  onChange("interestRate", INTEREST_TYPE_DEFAULTS[type]);
+                  onChange({
+                    interestType: type,
+                    interestRate: INTEREST_TYPE_DEFAULTS[type],
+                  });
                 }}
                 className={`flex-1 py-1.5 text-sm font-medium transition-colors ${
                   i > 0 ? "border-l border-input" : ""

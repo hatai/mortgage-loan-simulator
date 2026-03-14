@@ -14,8 +14,15 @@ interface InputPanelProps {
 }
 
 export function InputPanel({ input, onChange, onSubmit, isLoading }: InputPanelProps) {
-  const handleFieldChange = (field: string, value: unknown) => {
-    onChange({ ...input, [field]: value });
+  const handleFieldChange = (
+    fieldOrFields: string | Record<string, unknown>,
+    value?: unknown,
+  ) => {
+    if (typeof fieldOrFields === "string") {
+      onChange({ ...input, [fieldOrFields]: value });
+    } else {
+      onChange({ ...input, ...fieldOrFields });
+    }
   };
 
   return (
