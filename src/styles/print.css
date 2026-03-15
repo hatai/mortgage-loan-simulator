@@ -1,0 +1,49 @@
+@media print {
+  /* Hide navigation, buttons, and interactive elements */
+  header,
+  footer,
+  .print\:hidden,
+  [data-slot="slider"],
+  button:not(.print-visible) {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure content fills the page */
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Show print-only elements */
+  .print\:block {
+    display: block !important;
+  }
+
+  /* Charts should not break across pages */
+  .recharts-wrapper {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Cards and sections should not break */
+  [class*="rounded-xl"],
+  [class*="rounded-2xl"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Print footer with URL and date */
+  @page {
+    margin: 1.5cm;
+    @bottom-center {
+      content: "住宅ローンシミュレーター — " counter(page);
+    }
+  }
+}
