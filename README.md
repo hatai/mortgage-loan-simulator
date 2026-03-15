@@ -1,199 +1,113 @@
-Welcome to your new TanStack Start app!
+# 住宅ローンシミュレーター
 
-# Getting Started
+日本市場に特化した住宅ローンシミュレーター。物件価格・金利・維持費から月々の支払額を算出し、必要な年収の目安や住宅ローン控除の概算まで一括でシミュレーションできるWebアプリケーション。
 
-To run this application:
+## スクリーンショット
+
+> TODO: スクリーンショットを追加
+
+## 機能一覧
+
+- 元利均等返済 / 元金均等返済の計算
+- ボーナス返済対応
+- 変動金利シナリオ（楽観・基準・悲観・手動）と5年ルール / 125%ルールの適用
+- 繰り上げ返済シミュレーション（期間短縮型 / 返済額軽減型、最大5回設定可能）
+- 住宅ローン控除の概算（2026年度税制改正対応）
+- 諸費用の概算（仲介手数料、登録免許税、保証料など）
+- 賃貸との比較（家賃上昇率を考慮した総支払額の比較）
+- 返済比率に基づく目安年収の表示（20% / 25% / 30%）
+- URLクエリパラメータによるシミュレーション結果の共有
+- プランの保存と比較（localStorage、最大3プラン横並び比較）
+- 住宅ローン用語のツールチップ表示
+- 印刷 / PDF出力対応（`@media print`）
+- ライト / ダークモード
+- レスポンシブデザイン（スマートフォン対応）
+
+## 技術スタック
+
+| 領域 | 技術 |
+| --- | --- |
+| フレームワーク | TanStack Start + React 19 |
+| スタイリング | Tailwind CSS v4 + shadcn/ui |
+| チャート | Recharts |
+| バリデーション | Zod |
+| フォーム | TanStack Form |
+| デプロイ | Cloudflare Workers |
+| ツールチェーン | Vite+ (vp) |
+
+## セットアップ
+
+### 前提条件
+
+- Node.js 24以上
+- pnpm
+- vp CLI（Vite+）
+
+### インストールと起動
 
 ```bash
-pnpm install
-pnpm dev
+# 依存関係のインストール
+vp install
+
+# 開発サーバーの起動（ポート3000）
+vp dev
+
+# プロダクションビルド
+vp build
+
+# ビルド結果のプレビュー
+vp preview
 ```
 
-# Building For Production
+## テスト
 
-To build this application for production:
+ユニットテスト174件、E2Eテスト15件。
 
 ```bash
-pnpm build
+# 全テストの実行
+vp test run
+
+# ウォッチモードでの実行
+vp test
+
+# 特定ファイルのテスト
+vp test run src/lib/loan-calculator.test.ts
 ```
 
-## Testing
+## プロジェクト構成
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-pnpm test
+```
+src/
+├── routes/
+│   ├── __root.tsx            # ルートレイアウト
+│   ├── index.tsx             # メインシミュレーター
+│   ├── plans.tsx             # 保存済みプラン一覧
+│   └── compare.tsx           # プラン比較
+├── components/
+│   ├── simulator/            # 入力フォーム系コンポーネント
+│   ├── results/              # 結果表示系コンポーネント
+│   ├── plans/                # プラン管理系コンポーネント
+│   ├── shared/               # 共通コンポーネント（ツールチップ等）
+│   └── ui/                   # shadcn/ui
+├── server/
+│   ├── calculate.ts          # サーバーファンクション
+│   └── validation.ts         # Zodバリデーション
+├── lib/
+│   ├── loan-calculator.ts    # ローン計算ロジック
+│   ├── prepayment-calculator.ts  # 繰り上げ返済計算
+│   ├── tax-deduction.ts      # 住宅ローン控除計算
+│   ├── closing-costs.ts      # 諸費用計算
+│   ├── rent-comparison.ts    # 賃貸比較計算
+│   ├── glossary.ts           # 用語辞書データ
+│   ├── url-params.ts         # URL共有用パラメータ変換
+│   ├── types.ts              # 型定義
+│   └── plans-storage.ts      # localStorage操作
+├── hooks/
+│   └── use-plans.ts          # プラン管理フック
+└── styles/
+    └── print.css             # 印刷用スタイル
 ```
 
-## Styling
+## ライセンス
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `pnpm add @tailwindcss/vite tailwindcss --dev`
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "My App" },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-});
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from "@tanstack/react-start";
-
-const getServerTime = createServerFn({
-  method: "GET",
-}).handler(async () => {
-  return new Date().toISOString();
-});
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    getServerTime().then(setTime);
-  }, []);
-
-  return <div>Server time: {time}</div>;
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from "@tanstack/react-router";
-import { json } from "@tanstack/react-start";
-
-export const Route = createFileRoute("/api/hello")({
-  server: {
-    handlers: {
-      GET: () => json({ message: "Hello, World!" }),
-    },
-  },
-});
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from "@tanstack/react-router";
-
-export const Route = createFileRoute("/people")({
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json();
-  },
-  component: PeopleComponent,
-});
-
-function PeopleComponent() {
-  const data = Route.useLoaderData();
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  );
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+MIT
