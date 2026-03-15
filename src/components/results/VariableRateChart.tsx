@@ -57,7 +57,7 @@ export function VariableRateChart({ result }: VariableRateChartProps) {
 
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={chartData} margin={{ top: 4, right: 16, left: 0, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+          <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.15} />
           <XAxis
             dataKey="year"
             tickFormatter={(v) => `${v}年`}

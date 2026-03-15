@@ -79,7 +79,7 @@ export function IncomeGuideline({ result }: IncomeGuidelineProps) {
                     >
                       {label}
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-muted-foreground">
                       <GlossaryTooltip termKey="repayment_ratio">返済比率</GlossaryTooltip> {ratio}% — {description}
                     </span>
                   </div>

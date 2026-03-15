@@ -22,13 +22,13 @@ export function TaxDeductionSection({ result }: TaxDeductionSectionProps) {
       <details>
         <summary className="flex items-center justify-between px-5 py-4 cursor-pointer select-none list-none group">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold text-gray-700">住宅ローン控除（年次一覧）</h3>
-            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full font-medium">
+            <h3 className="text-sm font-semibold text-foreground">住宅ローン控除（年次一覧）</h3>
+            <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full font-medium">
               13年間合計 {formatManYen(totalDeduction)}
             </span>
           </div>
           <svg
-            className="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform"
+            className="w-4 h-4 text-muted-foreground group-open:rotate-180 transition-transform"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -53,32 +53,32 @@ export function TaxDeductionSection({ result }: TaxDeductionSectionProps) {
           </div>
 
           {/* 年次テーブル */}
-          <div className="overflow-x-auto rounded-lg border border-gray-100">
+          <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50">
+              <thead className="bg-muted/50">
                 <tr className="text-xs text-muted-foreground">
                   <th className="text-left px-3 py-2 font-medium">年次</th>
                   <th className="text-right px-3 py-2 font-medium">年末残高</th>
                   <th className="text-right px-3 py-2 font-medium">控除額（年）</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-border">
                 {yearlyDeductions.map(({ year, amount, balance }) => (
-                  <tr key={year} className="hover:bg-gray-50/50">
-                    <td className="px-3 py-2 text-gray-600">{year}年目</td>
-                    <td className="px-3 py-2 text-right text-gray-700">{formatManYen(balance)}</td>
-                    <td className="px-3 py-2 text-right font-semibold text-gray-800">
+                  <tr key={year} className="hover:bg-muted/30">
+                    <td className="px-3 py-2 text-muted-foreground">{year}年目</td>
+                    <td className="px-3 py-2 text-right text-foreground">{formatManYen(balance)}</td>
+                    <td className="px-3 py-2 text-right font-semibold text-foreground">
                       {formatYen(amount)}
                     </td>
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="bg-gray-50 border-t border-gray-100">
+              <tfoot className="bg-muted/50 border-t border-border">
                 <tr>
-                  <td className="px-3 py-2 font-semibold text-gray-800" colSpan={2}>
+                  <td className="px-3 py-2 font-semibold text-foreground" colSpan={2}>
                     控除総額
                   </td>
-                  <td className="px-3 py-2 text-right font-bold text-gray-900">
+                  <td className="px-3 py-2 text-right font-bold text-foreground">
                     {formatManYen(totalDeduction)}
                   </td>
                 </tr>

@@ -66,7 +66,7 @@ export function RepaymentScheduleChart({ result }: RepaymentScheduleChartProps) 
       <h3 className="text-sm font-semibold text-foreground mb-4">返済スケジュール（年次推移）</h3>
       <ResponsiveContainer width="100%" height={220}>
         <AreaChart data={data} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+          <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.15} />
           <XAxis
             dataKey="year"
             tick={{ fontSize: 11 }}
@@ -96,9 +96,9 @@ export function RepaymentScheduleChart({ result }: RepaymentScheduleChartProps) 
       </ResponsiveContainer>
 
       {/* 残高推移を補足 */}
-      <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-500">
+      <div className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
         <span>ローン残高は</span>
-        <span className="font-semibold text-gray-700">
+        <span className="font-semibold text-foreground">
           {formatManYen(result.schedule[0]?.balance + (result.schedule[0]?.principal ?? 0))}
         </span>
         <span>から開始し、完済まで逓減します。</span>

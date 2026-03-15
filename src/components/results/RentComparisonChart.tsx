@@ -67,7 +67,7 @@ export function RentComparisonChart({ result }: RentComparisonChartProps) {
 
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.15} vertical={false} />
           <XAxis dataKey="name" tick={false} axisLine={false} />
           <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${v}万`} width={60} />
           <Tooltip content={<CustomTooltip />} />
@@ -98,11 +98,11 @@ export function RentComparisonChart({ result }: RentComparisonChartProps) {
       <div className="mt-3 grid grid-cols-2 gap-3">
         <div className="text-center">
           <p className="text-xs text-muted-foreground">賃貸 累計総額</p>
-          <p className="text-base font-bold text-gray-700">{formatManYen(rentTotal)}</p>
+          <p className="text-base font-bold text-muted-foreground">{formatManYen(rentTotal)}</p>
         </div>
         <div className="text-center">
           <p className="text-xs text-muted-foreground">購入 実質総額</p>
-          <p className="text-base font-bold text-gray-900">{formatManYen(purchaseTotal)}</p>
+          <p className="text-base font-bold text-foreground">{formatManYen(purchaseTotal)}</p>
         </div>
       </div>
     </div>

@@ -33,39 +33,39 @@ export function PrepaymentResult({ result }: PrepaymentResultProps) {
             <tr className="text-xs text-muted-foreground border-b border-gray-100">
               <th className="text-left pb-2 font-medium">項目</th>
               <th className="text-right pb-2 font-medium">繰り上げなし</th>
-              <th className="text-right pb-2 font-medium text-gray-700">繰り上げあり</th>
-              <th className="text-right pb-2 font-medium text-gray-700">差額</th>
+              <th className="text-right pb-2 font-medium text-muted-foreground">繰り上げあり</th>
+              <th className="text-right pb-2 font-medium text-muted-foreground">差額</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
             <tr>
-              <td className="py-2.5 text-gray-600">総返済額</td>
-              <td className="py-2.5 text-right font-medium text-gray-800">
+              <td className="py-2.5 text-muted-foreground">総返済額</td>
+              <td className="py-2.5 text-right font-medium text-foreground">
                 {formatManYen(originalTotal)}
               </td>
-              <td className="py-2.5 text-right font-medium text-gray-800">
+              <td className="py-2.5 text-right font-medium text-foreground">
                 {formatManYen(newTotal)}
               </td>
-              <td className="py-2.5 text-right font-bold text-gray-900">-{formatManYen(saved)}</td>
+              <td className="py-2.5 text-right font-bold text-foreground">-{formatManYen(saved)}</td>
             </tr>
             {newMonthlyPayment !== undefined && (
               <tr>
-                <td className="py-2.5 text-gray-600">月々返済額</td>
-                <td className="py-2.5 text-right font-medium text-gray-800">—</td>
-                <td className="py-2.5 text-right font-medium text-gray-800">
+                <td className="py-2.5 text-muted-foreground">月々返済額</td>
+                <td className="py-2.5 text-right font-medium text-foreground">—</td>
+                <td className="py-2.5 text-right font-medium text-foreground">
                   {formatYen(newMonthlyPayment)}
                 </td>
-                <td className="py-2.5 text-right text-gray-400">軽減</td>
+                <td className="py-2.5 text-right text-muted-foreground">軽減</td>
               </tr>
             )}
             {shortenedMonths !== undefined && shortenedMonths > 0 && (
               <tr>
-                <td className="py-2.5 text-gray-600">返済期間短縮</td>
-                <td className="py-2.5 text-right font-medium text-gray-800">—</td>
-                <td className="py-2.5 text-right font-medium text-gray-800">
+                <td className="py-2.5 text-muted-foreground">返済期間短縮</td>
+                <td className="py-2.5 text-right font-medium text-foreground">—</td>
+                <td className="py-2.5 text-right font-medium text-foreground">
                   {Math.floor(shortenedMonths / 12)}年{shortenedMonths % 12}ヶ月短縮
                 </td>
-                <td className="py-2.5 text-right text-gray-900 font-semibold">
+                <td className="py-2.5 text-right text-foreground font-semibold">
                   -{shortenedMonths}ヶ月
                 </td>
               </tr>
