@@ -109,4 +109,31 @@ describe("loanInputSchema", () => {
     const result = loanInputSchema.safeParse({ ...validInput, interestType: "invalid" });
     expect(result.success).toBe(false);
   });
+
+  test("ボーナス返済額が借入額の50%超でエラー", () => {
+    // 借入額 = 3000 - 300 = 2700、50% = 1350
+    const result = loanInputSchema.safeParse({ ...validInput, bonusPayment: 1351 });
+    expect(result.success).toBe(false);
+  });
+
+  test("ボーナス返済額が借入額の50%ちょうどはOK", () => {
+    const result = loanInputSchema.safeParse({ ...validInput, bonusPayment: 1350 });
+    expect(result.success).toBe(true);
+  });
+
+  test("繰り上げ返済時期が返済期間を超えるとエラー", () => {
+    const result = loanInputSchema.safeParse({
+      ...validInput,
+      prepayments: [{ year: 36, amount: 100, type: "shorten_term" as const }],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  test("繰り上げ返済時期が返済期間内はOK", () => {
+    const result = loanInputSchema.safeParse({
+      ...validInput,
+      prepayments: [{ year: 35, amount: 100, type: "shorten_term" as const }],
+    });
+    expect(result.success).toBe(true);
+  });
 });

@@ -29,4 +29,22 @@ export const loanInputSchema = z
   .refine((data) => data.downPayment < data.propertyPrice, {
     message: "頭金は物件価格未満にしてください（借入額が必要です）",
     path: ["downPayment"],
-  });
+  })
+  .refine(
+    (data) => {
+      const loanAmount = data.propertyPrice - data.downPayment;
+      return data.bonusPayment <= loanAmount * 0.5;
+    },
+    {
+      message: "ボーナス返済額は借入額の50%以下にしてください",
+      path: ["bonusPayment"],
+    },
+  )
+  .refine(
+    (data) =>
+      data.prepayments.every((p) => p.year <= data.loanTermYears),
+    {
+      message: "繰り上げ返済時期は返済期間内にしてください",
+      path: ["prepayments"],
+    },
+  );
