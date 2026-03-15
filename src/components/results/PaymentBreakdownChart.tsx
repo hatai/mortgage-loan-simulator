@@ -45,12 +45,12 @@ export function PaymentBreakdownChart({ result }: PaymentBreakdownChartProps) {
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg text-sm">
+        <div className="bg-popover border border-border rounded-lg p-3 shadow-lg text-sm text-popover-foreground">
           {payload.map((entry) => (
             <div key={entry.name} className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: entry.color }} />
-              <span className="text-gray-600">{entry.name}:</span>
-              <span className="font-semibold">{formatYen(entry.value)}</span>
+              <span className="text-muted-foreground">{entry.name}:</span>
+              <span className="font-semibold text-foreground">{formatYen(entry.value)}</span>
             </div>
           ))}
         </div>
@@ -90,8 +90,8 @@ export function PaymentBreakdownChart({ result }: PaymentBreakdownChartProps) {
             value > 0 && (
               <div key={label} className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: color }} />
-                <span className="text-xs text-gray-500">{label}</span>
-                <span className="text-xs font-semibold text-gray-800">{formatYen(value)}</span>
+                <span className="text-xs text-muted-foreground">{label}</span>
+                <span className="text-xs font-semibold text-foreground">{formatYen(value)}</span>
               </div>
             ),
         )}

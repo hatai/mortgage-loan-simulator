@@ -40,13 +40,13 @@ export function RepaymentScheduleChart({ result }: RepaymentScheduleChartProps) 
   }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg text-sm">
-          <p className="font-semibold text-gray-700 mb-1">{label}</p>
+        <div className="bg-popover border border-border rounded-lg p-3 shadow-lg text-sm text-popover-foreground">
+          <p className="font-semibold text-foreground mb-1">{label}</p>
           {payload.map((entry) => (
             <div key={entry.name} className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: entry.color }} />
-              <span className="text-gray-600">{entry.name}:</span>
-              <span className="font-semibold">{entry.value.toLocaleString("ja-JP")}万円</span>
+              <span className="text-muted-foreground">{entry.name}:</span>
+              <span className="font-semibold text-foreground">{entry.value.toLocaleString("ja-JP")}万円</span>
             </div>
           ))}
         </div>
